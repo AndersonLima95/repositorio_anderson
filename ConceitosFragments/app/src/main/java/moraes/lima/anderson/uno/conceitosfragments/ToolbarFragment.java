@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
+    //public static final String  TAG = "ToolbaFragment";
     private EditText         edtInformarTexto;
     private SeekBar          skbFormatarTexto;
     private Button           btnTexto;
@@ -23,8 +25,6 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
     //Modo de declaração de interface , sempre segue esta assinatura.
     public interface ToolbarListener{
         void onButtonClick(int position , String texto);
-
-
     }
 
     public ToolbarFragment() {}
@@ -34,11 +34,6 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
         super.onCreate(savedInstanceState);
 
 
-    }
-
-    public static ToolbarFragment newInstance(String param1, String param2) {
-
-        return null;
     }
 
 
@@ -58,13 +53,15 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
             }
         });
 
+        skbFormatarTexto.setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
+
 
 
         return toolBarLayoutInflater;
     }
-
+    
     @Override
-    public void onAttach(@NonNull Context context) {
+    public void onAttach( Context context) {
         super.onAttach(context);
 
         try{
@@ -95,6 +92,8 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+        //Log.d(TAG, "onStartTrackingTouch: executou o método quando tirou - se o dedo da seekbar" );
+
 
     }
 }

@@ -3,11 +3,8 @@ package moraes.lima.anderson.uno.conceitosfragments;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements ToolbarFragment.ToolbarListener {
 
 
     @Override
@@ -17,4 +14,10 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    @Override
+    public void onButtonClick(int position, String texto) {
+        TextoFragment tvExibirTexto = (TextoFragment) getSupportFragmentManager().findFragmentById(R.id.frgTexto);
+        tvExibirTexto.trocarPropriedadesDoTexto(position, texto);
+
+    }
 }

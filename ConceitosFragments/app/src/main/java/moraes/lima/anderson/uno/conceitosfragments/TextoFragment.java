@@ -9,24 +9,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.zip.Inflater;
+
 
 public class TextoFragment extends Fragment {
+    private TextView tvExibirTexto;
 
 
     public TextoFragment() {}
 
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_textofragment, container , false);
+
+        tvExibirTexto = view.findViewById(R.id.tvExibirTexto);
+
+        return view ;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void trocarPropriedadesDoTexto(int tamanhoDaFonte, String texto) {
+        tvExibirTexto.setTextSize(tamanhoDaFonte);
+        tvExibirTexto.setText(texto);
 
-
-        return inflater.inflate(R.layout.fragment_textofragment, container,false);
     }
 }
