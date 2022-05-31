@@ -63,8 +63,6 @@ public class RespostaActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     @Override

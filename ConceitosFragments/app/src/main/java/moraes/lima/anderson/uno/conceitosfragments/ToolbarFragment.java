@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
-    //public static final String  TAG = "ToolbaFragment";
+    public static final String  TAG = "ToolbaFragment";
     private EditText         edtInformarTexto;
     private SeekBar          skbFormatarTexto;
     private Button           btnTexto;
@@ -59,7 +59,7 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
 
         return toolBarLayoutInflater;
     }
-    
+
     @Override
     public void onAttach( Context context) {
         super.onAttach(context);
@@ -92,7 +92,7 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        //Log.d(TAG, "onStartTrackingTouch: executou o método quando tirou - se o dedo da seekbar" );
+        Log.d(TAG, "onStartTrackingTouch: executou o método quando tirou - se o dedo da seekbar" );
 
 
     }

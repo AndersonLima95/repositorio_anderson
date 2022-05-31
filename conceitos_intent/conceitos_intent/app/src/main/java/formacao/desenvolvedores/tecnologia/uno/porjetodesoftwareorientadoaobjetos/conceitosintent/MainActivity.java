@@ -1,9 +1,16 @@
 package formacao.desenvolvedores.tecnologia.uno.porjetodesoftwareorientadoaobjetos.conceitosintent;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +22,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnPerguntar;
-    private TextView tvExibirRespota;
+    private TextView tvExibirResposta;
     private TextView tvTitulo;
     private EditText edtPergunta;
     private ImageButton btnDelete;
-    public static final int REQUEST_CODE = 5;
+    private static final int REQUEST_CODE = 5;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
 
     @Override
@@ -28,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnPerguntar    = findViewById(R.id.btnPerguntar);
-        tvExibirRespota = findViewById(R.id.tvExibirResposta);
-        edtPergunta     = findViewById(R.id.edtPergunta);
-        btnDelete       = findViewById(R.id.btnDelete);
-        tvTitulo        = findViewById(R.id.tvTitulo);
+        btnPerguntar        = findViewById(R.id.btnPerguntar);
+        tvExibirResposta    = findViewById(R.id.tvExibirResposta);
+        edtPergunta         = findViewById(R.id.edtPergunta);
+        btnDelete           = findViewById(R.id.btnDelete);
+        tvTitulo            = findViewById(R.id.tvTitulo);
 
         tvTitulo.setVisibility(View.INVISIBLE);
 
@@ -41,29 +49,54 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!edtPergunta.getText().toString().isEmpty()){
-                    Intent irParaOutraActivity = new Intent(MainActivity.this, RespostaActivity.class);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                        Intent irParaOutraActivity = new Intent(MainActivity.this, RespostaActivity.class);
 
-                    String conteudo = edtPergunta.getText().toString();
-                    irParaOutraActivity.putExtra("Pergunta", conteudo);
+                        String conteudo = edtPergunta.getText().toString();
+                        irParaOutraActivity.putExtra("Pergunta", conteudo);
 
-                    startActivityForResult(irParaOutraActivity, REQUEST_CODE);
+                        if (!tvExibirResposta.getText().toString().isEmpty()) {
+                            //MÉTODO 1 DE COLOCAR A RESPOSTA DENTRO DA INTENT.
+                            String myResposta = tvExibirResposta.getText().toString();
+                            irParaOutraActivity.putExtra("Resposta", myResposta);
+                        }
+                            startActivityForResult(irParaOutraActivity, REQUEST_CODE);
+
+                    }else {
+                        openActivityForResult();
+                    }
 
 
-                } else {
-                    Toast.makeText(MainActivity.this, "Insira uma pergunta", Toast.LENGTH_LONG).show();
+                }else{
+
+                        Toast.makeText(MainActivity.this, "Insira uma pergunta", Toast.LENGTH_LONG).show();
+
                 }
+
+
             }
+
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 edtPergunta.setText("");
-                tvExibirRespota.setText("");
+                tvExibirResposta.setText("");
             }
         });
 
-
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if(result.getResultCode() == Activity.RESULT_OK){
+                    Intent data = result.getData();
+                    tvTitulo.setVisibility(View.VISIBLE);
+                    tvExibirResposta.setText(data.getExtras().getString("returnData"));
+                }
+            }
+        });
 
     }
 
@@ -85,7 +118,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            tvExibirRespota.setText(returnString);
+            tvExibirResposta.setText(returnString);
         }
     }
+
+    private void openActivityForResult(){
+        Intent outraActivity  = new Intent(this , RespostaActivity.class);
+        //MÉTODO 2 DE COLOCAR A PERGUNTA DENTRO DA INTENT.
+        outraActivity.putExtra("Pergunta" , edtPergunta.getText().toString());
+
+        activityResultLauncher.launch(outraActivity);
+
+    }
 }
+

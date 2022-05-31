@@ -51,7 +51,7 @@
         app:srcCompat="@drawable/ic_clear_24" />
 
     <TextView
-        android:id="@+id/tvTitulo2"
+        android:id="@+id/tvTitulo"
         android:layout_width="0dp"
         android:layout_height="20dp"
         android:text="A pergunta é: "
