@@ -33,6 +33,7 @@ public class RespostaActivity extends AppCompatActivity {
         if(actionBar != null){
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("Activity de Respostas");
         }
 
         btnResponder         = findViewById(R.id.btnResponder);

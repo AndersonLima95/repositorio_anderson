@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -20,7 +21,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import formacao.desenvolvedores.tecnologia.uno.porjetodesoftwareorientadoaobjetos.conceitosintent.utils.app.UtilsApp;
+
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG = "MainActivity";
     private Button btnPerguntar;
     private TextView tvExibirResposta;
     private TextView tvTitulo;
@@ -34,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setTitle("Activity de Perguntas");
+        }
 
 
         btnPerguntar        = findViewById(R.id.btnPerguntar);
@@ -86,8 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK){
@@ -97,6 +105,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //CONVERSÃO DE TIPOS PRIMITIVOS.
+        UtilsApp utilsApp = new UtilsApp();
+        Log.d(TAG , "Valor convertido de tipos primitivos double p/ int: "  + utilsApp.convertToInt(5.1987));
+
+        byte b = -27;
+        Log.d(TAG , "Valor convertido de tipos primitivos byte p/ int: "  + utilsApp.convertToInt(b));
+
+        char valorChar = 'A';
+        Log.d(TAG , "Valor convertido de tipos primitivos char p/ int: "  + utilsApp.convertToInt(valorChar));
+
+        short valorShort = 1000;
+        Log.d(TAG , "Valor convertido de tipos primitivos short p/ int: "  + utilsApp.convertToInt(valorShort));
+
+        long valorLong = 9253531313189L;
+        Log.d(TAG , "Valor convertido de tipos primitivos long p/ int: "  + utilsApp.convertToInt(valorLong));
+
+
+        //Log.d(TAG , "Valor convertido de tipos primitivos String p/ int: "  + utilsApp.convertToInt("32"));
 
     }
 
