@@ -48,10 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:textAlignment="center"
         android:ems="10"
         android:hint="valor"
         android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/tvOperacao"
         app:layout_constraintTop_toBottomOf="@+id/spiOpcoes" />
 
@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imgvOperacao" />
 
     <ImageView
-        android:id="@+id/imgIgual"
+        android:id="@+id/imgvIgual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -94,9 +94,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Calcular"
-        app:layout_constraintEnd_toEndOf="@+id/imgIgual"
-        app:layout_constraintStart_toStartOf="@+id/imgIgual"
-        app:layout_constraintTop_toBottomOf="@+id/imgIgual"
+        app:layout_constraintEnd_toEndOf="@+id/imgvIgual"
+        app:layout_constraintStart_toStartOf="@+id/imgvIgual"
+        app:layout_constraintTop_toBottomOf="@+id/imgvIgual"
         />
 
     <TextView
