@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,21 +16,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private TextView tvOpcao , tvResultado , tvOperacao;
+    private static final String TAG              = "MainActivity";
+    private static final String DIVISAO          = "Divisão";
+    private static final String MULTIPLICACAO    = "Multiplicação";
+    private static final String SOMA             = "Soma";
+    private static final String SUBTRACAO        = "Subtração";
+    private TextView tvOpcao , tvResultado ;
     private Spinner spiOpcoes;
     private EditText edtOperando1 , edtOperando2;
     private ImageView imgvOperacao , imgvIgual;
     private Button btnCalcular;
-    private static final String DIVISAO = "Divisão";
-    private static final String MULTIPLICACAO = "Multiplicão";
-    private static final String SOMA = "Soma";
-    private static final String SUBTRACAO = "Subtração";
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setTitle("Calcular");
@@ -37,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         tvOpcao         = findViewById(R.id.tvOpcao);
-        tvOperacao      = findViewById(R.id.tvOperacao);
         tvResultado     = findViewById(R.id.tvResultado);
 
         edtOperando1    = findViewById(R.id.edtOperando1);
@@ -52,29 +56,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         spiOpcoes       = findViewById(R.id.spiOpcoes);
 
+        ArrayAdapter<String> adapterOperacoesMatematicas = new ArrayAdapter<>(MainActivity.this
+                , android.R.layout.simple_spinner_item
+                , getResources().getStringArray(R.array.operacoes_matematica));
+        adapterOperacoesMatematicas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            ArrayAdapter<String> adapteroperacoesMatematicas = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item , getResources().getStringArray(R.array.operacoes_matematica));
-            adapteroperacoesMatematicas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spiOpcoes.setAdapter(adapterOperacoesMatematicas);
+        spiOpcoes.setOnItemSelectedListener(this);
 
-            spiOpcoes.setAdapter(adapteroperacoesMatematicas);
-            spiOpcoes.setOnItemSelectedListener(this);
 
-        String opcaoSelecionada = spiOpcoes.getSelectedItem().toString();
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                String opcaoSelecionada = spiOpcoes.getSelectedItem().toString();
+
                 if (opcaoSelecionada == DIVISAO ) {
 
-                }
-                if(opcaoSelecionada == MULTIPLICACAO){
+                    tvResultado.setText(String.valueOf(n1 / n2));
 
-                }
-                if(opcaoSelecionada == SOMA){
+                }else if(opcaoSelecionada == MULTIPLICACAO){
 
-                }
-                if(opcaoSelecionada == SUBTRACAO){
+                }else if(opcaoSelecionada == SOMA){
+
+
+                }else if(opcaoSelecionada == SUBTRACAO){
+
+
+                }else{
+                    Toast.makeText(MainActivity.this, "Por favor selecione a operação matemática", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -83,25 +94,63 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this, adapterView.getItemIdAtPosition(i), Toast.LENGTH_SHORT).show();
-        if(adapterView.getItemIdAtPosition(i).toString() == DIVISAO){
-            imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.ic_soma , getTheme());
+
+        //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+        imgvOperacao.setVisibility(View.VISIBLE);
+
+        // imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.ic_soma , getTheme());
+
+
+        if(adapterView.getItemAtPosition(i).toString().equals(DIVISAO)){
+            imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.divisao , getTheme()));
+
+        } else if(adapterView.getItemAtPosition(i).toString().equals(MULTIPLICACAO)){
+            imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.multiplica , getTheme()));
+
+        } else if(adapterView.getItemAtPosition(i).toString().equals(SOMA)){
+            imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.soma , getTheme()));
 
         }
-        if(edtOperando1.getText().toString() == MULTIPLICACAO){
+        else if(adapterView.getItemAtPosition(i).toString().equals(SUBTRACAO)){
+            imgvOperacao.setImageDrawable(getResources().getDrawable(R.drawable.subtracao , getTheme()));
+
+        } else{
+            Log.d(TAG , "Nenhuma opção foi selecionada");
 
         }
-        if(edtOperando1.getText().toString() == SOMA){
+        //app:srcCompat="@drawable/soma"
 
-        }
-        if(edtOperando1.getText().toString() == SUBTRACAO){
-
-        }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    private void dividir(View v){
+        double n1 = Double.parseDouble(edtOperando1.getText().toString());
+        double n2 = Double.parseDouble(edtOperando2.getText().toString());
+
+
+
+    }
+    private void multiplicar(View v){
+        double n1 = Double.parseDouble(edtOperando1.getText().toString());
+        double n2 = Double.parseDouble(edtOperando2.getText().toString());
+        tvResultado.setText(String.valueOf(n1 * n2));
+
+    }
+    private void somar(View v){
+        double n1 = Double.parseDouble(edtOperando1.getText().toString());
+        double n2 = Double.parseDouble(edtOperando2.getText().toString());
+        tvResultado.setText(String.valueOf(n1 + n2));
+
+    }
+    private void subtrair(View v){
+        double n1 = Double.parseDouble(edtOperando1.getText().toString());
+        double n2 = Double.parseDouble(edtOperando2.getText().toString());
+        tvResultado.setText(String.valueOf(n1 - n2));
 
     }
 
