@@ -4,9 +4,14 @@
     <string-array name="operacoes_matematica">
         <item> </item>
         <item>Divisão</item>
+        <item>Logaritmo</item>
         <item>Multiplicação</item>
+        <item>Potenciação</item>
+        <item>Pontencia de Base</item>
+        <item>Raiz Quadrada</item>
         <item>Soma</item>
         <item>Subtração</item>
+
 
 </string-array>
 </resources>
