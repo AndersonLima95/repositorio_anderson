@@ -15,7 +15,6 @@ public class Circunferencia extends Forma {
 	// implementação do método abstrato area()
 	@Override
 	public double area() {
-
 		return PI * Math.pow(getMedida(0), 2);
 	}
 
@@ -31,6 +30,7 @@ public class Circunferencia extends Forma {
 
 	// comparador não-estático
 	public int comparador2(Circunferencia b) {
+
 		return (int) (this.area() - b.area());
 	}
 }

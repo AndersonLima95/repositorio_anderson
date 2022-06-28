@@ -1,9 +1,7 @@
 package moraes.lima.anderson.uno.conceitosclassesabastrataseinterfaces;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,6 +28,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_main);
 
         spiOpcoes   = findViewById(R.id.spiOpcoes);
+
 
         ArrayAdapter<String> adapterFormas = new ArrayAdapter<>(this
                 , android.R.layout.simple_spinner_item
