@@ -1,10 +1,9 @@
 package moraes.lima.anderson.uno.tddtesteunitario.forma;
 
-public class Retangulo extends Forma{
-    private static final int TAMANHO_MAXIMO_ARRAY_INFO_CALCULO_AREA = 2;
+public class Triangulo extends Forma{
+    private static final int TAMANHO_MAXIMO_ARRAY_INFO_CALCULO_AREA = 3;
 
-
-    public Retangulo() {
+    public Triangulo() {
 
         super(TAMANHO_MAXIMO_ARRAY_INFO_CALCULO_AREA);
     }

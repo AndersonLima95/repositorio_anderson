@@ -16,8 +16,7 @@ public class Triangulo extends Forma {
 	@Override
 	public double area() {
 		double sp = (getMedida(0) + getMedida(1) + getMedida(2)) / 2;
-		double aux = sp * (sp - getMedida(0)) * (sp - getMedida(1))
-				* (sp - getMedida(2));
+		double aux = sp * (sp - getMedida(0)) * (sp - getMedida(1)) * (sp - getMedida(2));
 		return Math.sqrt(aux);
 	}
 }
