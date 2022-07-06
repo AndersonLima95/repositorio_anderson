@@ -10,6 +10,14 @@ public class Triangulo extends Forma{
 
     @Override
     public double area() {
-        return 0;
+        double perimetro     = getMedida(0) + getMedida(1) + getMedida(2);
+
+        double semiPerimetro = perimetro / 2;
+
+        double area          = semiPerimetro * (semiPerimetro - getMedida(0)) * (semiPerimetro - getMedida(1))
+                * (semiPerimetro - getMedida(2));
+        return Math.sqrt(area);
     }
+
+
 }
