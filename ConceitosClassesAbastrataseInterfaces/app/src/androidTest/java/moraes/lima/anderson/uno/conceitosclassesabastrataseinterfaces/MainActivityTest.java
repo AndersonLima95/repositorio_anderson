@@ -20,6 +20,8 @@ public class MainActivityTest {
         ActivityScenario<MainActivity> activityScenario = ActivityScenario.launch(MainActivity.class);
         onView(withId(R.id.idActivityMain)).check(matches(isDisplayed()));
 
+        
+
 
 
 
