@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Mor Integracao Com Java"
 include ':app'
+
+
