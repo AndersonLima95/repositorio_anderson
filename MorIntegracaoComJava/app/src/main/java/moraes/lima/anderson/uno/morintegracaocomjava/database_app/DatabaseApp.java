@@ -1,18 +1,16 @@
 package moraes.lima.anderson.uno.morintegracaocomjava.database_app;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import moraes.lima.anderson.uno.morintegracaocomjava.MainActivity;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.converter.Converters;
 
+@TypeConverters({Converters.class})
 public abstract class DatabaseApp extends RoomDatabase {
     private static final String TAG = "DatabaseApp";
     private static final String DB_NAME = "db_app.db";
@@ -22,6 +20,7 @@ public abstract class DatabaseApp extends RoomDatabase {
     }
 
     public static synchronized DatabaseApp getInstance(Context context) {
+
         return null;
     }
 
@@ -36,7 +35,7 @@ public abstract class DatabaseApp extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Executors.newSingleThreadScheduledExecutor().execute(() -> {
-            //Executar métodos e\ou rotinas logo appós a criação do banco
+            //Executar métodos e\ou rotinas logo após a criação do banco
                 Log.d(TAG, " Banco criado com sucesso! Executar rotinas posteriores");
 
             });
@@ -45,7 +44,6 @@ public abstract class DatabaseApp extends RoomDatabase {
         public void onOpen(SupportSQLiteDatabase db){
 
         }
-
     };
 
 
