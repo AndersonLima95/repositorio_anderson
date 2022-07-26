@@ -7,8 +7,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 
 /*DEFINIÇÃO DE CHAVES ENSTRANGEIRAS*/
-@Entity(tableName = "tbl aluno_prova"
-        ,primaryKeys = {"idAluno" , "idProva"}
+@Entity(tableName = "tblaluno_prova"
+        ,primaryKeys = {"aluno_id" , "prova_id"}
         , indices = {@Index(value = {"aluno_id"}) , @Index(value = {"prova_id"}) , @Index(value = {"id"})}
         , foreignKeys = {@ForeignKey(entity = Aluno.class , parentColumns = "id" ,
             childColumns = "aluno_id" , onUpdate = CASCADE , onDelete = CASCADE)
@@ -28,10 +28,12 @@ public class AlunoProva {
     }
 
     public int getAluno_id() {
+
         return aluno_id;
     }
 
     public void setAluno_id(int aluno_id) {
+
         this.aluno_id = aluno_id;
     }
 

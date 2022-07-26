@@ -9,6 +9,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.Executors;
 
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.converter.Converters;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao.ICRUDAlunoDao;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao.ICRUDAlunoProvaDao;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao.ICRUDPerguntaDao;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao.ICRUDProvaDao;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao.ICRUDRespostaDao;
 
 @TypeConverters({Converters.class})
 public abstract class DatabaseApp extends RoomDatabase {
@@ -16,12 +21,20 @@ public abstract class DatabaseApp extends RoomDatabase {
     private static final String DB_NAME = "db_app.db";
     private static volatile DatabaseApp sInstance;
 
-    public DatabaseApp() {
-    }
+    public abstract ICRUDAlunoDao alunosDAO();
+    public abstract ICRUDAlunoProvaDao alunoProvaDAO();
+    public abstract ICRUDProvaDao provaDAO();
+    public abstract ICRUDPerguntaDao perguntaDAO();
+    public abstract ICRUDRespostaDao respostaDAO();
+
+    public DatabaseApp() {}
 
     public static synchronized DatabaseApp getInstance(Context context) {
+        if(sInstance == null){
+            sInstance = getConnection(context);
+        }
 
-        return null;
+        return sInstance;
     }
 
     private static DatabaseApp getConnection(Context contextActivity) {

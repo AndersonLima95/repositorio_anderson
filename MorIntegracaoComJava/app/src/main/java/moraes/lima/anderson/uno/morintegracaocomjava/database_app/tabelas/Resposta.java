@@ -7,12 +7,13 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "tbl resposta"
+@Entity(tableName = "tbl_resposta"
         , indices = {@Index(value = {"pergunta_id"}) , @Index(value = {"id"})}
         , foreignKeys = {@ForeignKey(entity = Pergunta.class , parentColumns = "id" ,
             childColumns = "pergunta_id" , onUpdate = CASCADE , onDelete = CASCADE)})
 
-/*@Entity(tableName = "tbl aluno_prova"
+/*EXEMPLO UTILIZADO PARA CRIAR AS REFERÊNCIAS
+@Entity(tableName = "tbl aluno_prova"
         ,primaryKeys = {"idAluno" , "idProva"}
         , indices = {@Index(value = {"aluno_id"}) , @Index(value = {"prova_id"})}
         , foreignKeys = {@ForeignKey(entity = Aluno.class , parentColumns = "id" ,

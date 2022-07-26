@@ -27,18 +27,22 @@ public class Aluno {
     }
 
     public int getId() {
+
         return id;
     }
 
     public void setId(int id) {
+
         this.id = id;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
@@ -47,22 +51,27 @@ public class Aluno {
     }
 
     public void setCelular(String celular) {
+
         this.celular = celular;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public String getGithub_usuario() {
+
         return github_usuario;
     }
 
     public void setGithub_usuario(String github_usuario) {
+
         this.github_usuario = github_usuario;
     }
 }

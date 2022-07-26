@@ -15,6 +15,7 @@ import androidx.room.PrimaryKey;
             childColumns = "resposta_id" , onUpdate = CASCADE , onDelete = CASCADE)})
 
 public class Pergunta {
+
     @PrimaryKey(autoGenerate = true)
     private int id , prova_id , resposta_id;
 
