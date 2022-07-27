@@ -1,4 +1,5 @@
 package moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,36 +10,34 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Aluno;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Pergunta;
 
 @Dao
-public interface ICRUDPerguntaDao {
+public interface ICRUDPerguntaDAO {
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-
-    public void insertPergunta(Pergunta tblPergunta);
+    public void insertPergunta(Pergunta perguntaTable);
 
     @Query("SELECT * FROM tbl_pergunta where id = :id")
-    public Pergunta getEspecificaPerguntaById(int id);
+    public Pergunta getEspecificPerguntaByID(int id);
 
     @Query("SELECT * FROM tbl_pergunta ORDER BY id DESC")
     public List<Pergunta> getAllPerguntas();
 
     @Transaction
-    @Update(entity = Pergunta.class , onConflict = OnConflictStrategy.REPLACE)
-    public  void updatePerguntas(Pergunta tblPergunta);
+    @Update(entity = Pergunta.class, onConflict = OnConflictStrategy.REPLACE)
+    public void updatePerguntas(Pergunta perguntaTable);
 
     @Transaction
     @Delete(entity = Pergunta.class)
-    public void deletePergunta(Pergunta tblPergunta);
+    public void deletePergunta(Pergunta perguntaTable);
 
     @Transaction
-    @Query(" DELETE FROM tbl_pergunta where id = :id")
+    @Query("DELETE FROM tbl_pergunta WHERE id = :id")
     public void deletePerguntaByID(int id);
 
     @Transaction
-    @Query("DELETE FROM tbl_pergunta where id > 0")
+    @Query("DELETE FROM tbl_pergunta WHERE id > 0")
     public void deleteAllPerguntas();
 }

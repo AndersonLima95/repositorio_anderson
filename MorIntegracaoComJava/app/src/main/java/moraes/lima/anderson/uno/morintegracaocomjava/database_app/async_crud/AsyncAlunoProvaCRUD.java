@@ -7,6 +7,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.DatabaseApp;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.dbcallbacks.IAlunoProvaDbCallback;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.AlunoProva;
@@ -44,11 +45,11 @@ public class AsyncAlunoProvaCRUD extends AsyncTask<AlunoProva, Integer, List<Alu
                     break;
                 }
                 case READ:{
-                    lista = databaseApp.alunoProvaDAO().getAllAlunoProvas();
+                    lista = databaseApp.alunoProvaDAO().getAllAlunosProvas();
                     break;
                 }
                 case UPDATE:{
-                    databaseApp.alunoProvaDAO().updateAlunoProvas(alunosProvas[0]);
+                    databaseApp.alunoProvaDAO().updateAlunoProva(alunosProvas[0]);
                     break;
                 }
                 case DELETE:{

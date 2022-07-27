@@ -7,6 +7,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.DatabaseApp;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.dbcallbacks.IRespostaDbCallback;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Resposta;
@@ -39,20 +40,20 @@ public class AsyncRespostaCRUD extends AsyncTask<Resposta, Integer, List<Respost
             switch (dbOperations){
                 case CREATE:{
                     for(Resposta resposta : respostas) {
-                        databaseApp.respostaDAO().insertResposta(resposta);
+                        databaseApp.respostasDAO().insertResposta(resposta);
                     }
                     break;
                 }
                 case READ:{
-                    lista = databaseApp.respostaDAO().getAllResposta();
+                    lista = databaseApp.respostasDAO().getAllRespostas();
                     break;
                 }
                 case UPDATE:{
-                    databaseApp.respostaDAO().updateRespostas(respostas[0]);
+                    databaseApp.respostasDAO().updateRespostas(respostas[0]);
                     break;
                 }
                 case DELETE:{
-                    databaseApp.respostaDAO().deleteResposta(respostas[0]);
+                    databaseApp.respostasDAO().deleteResposta(respostas[0]);
                     break;
                 }
             }

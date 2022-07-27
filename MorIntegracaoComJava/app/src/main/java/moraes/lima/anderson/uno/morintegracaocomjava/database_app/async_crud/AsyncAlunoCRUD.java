@@ -9,50 +9,58 @@ import java.util.List;
 
 
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.DatabaseApp;
-import moraes.lima.anderson.uno.morintegracaocomjava.database_app.dbcallbacks.IProvaDbCallback;
-import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Prova;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.dbcallbacks.IAlunoDbCallback;
+import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Aluno;
 import moraes.lima.anderson.uno.morintegracaocomjava.utils_app.UtilsApp;
 
-public class AsyncProvaCRUD extends AsyncTask<Prova, Integer, List<Prova>> {
-    private static String TAG = "AsyncProvaCRUD";
+public class AsyncAlunoCRUD extends AsyncTask<Aluno, Integer, List<Aluno>> {
+    private static String TAG = "AsyncAlunoCRUD";
     private UtilsApp.DataBaseCrudOperations dbOperations;
     private Context contextActivityOrFragment;
-    private List<Prova> lista = null;
+    private List<Aluno> lista = null;
 
     //Evitar leak de memória
-    private WeakReference<IProvaDbCallback> dbCallBack;
+    private WeakReference<IAlunoDbCallback> dbCallBack;
 
-    public AsyncProvaCRUD(UtilsApp.DataBaseCrudOperations dbOperations
+    public AsyncAlunoCRUD(UtilsApp.DataBaseCrudOperations dbOperations
             , Context context
-            , IProvaDbCallback callBack){
+            , IAlunoDbCallback callBack){
         this.dbOperations              = dbOperations;
         this.contextActivityOrFragment = context;
         dbCallBack                     = new WeakReference(callBack);
     }
 
+    public AsyncAlunoCRUD(Context context){
+        this.dbOperations              = UtilsApp.DataBaseCrudOperations.CREATE;
+        this.contextActivityOrFragment = context;
+        dbCallBack                     = null;
+    }
+
+
+
     @Override
-    protected List<Prova> doInBackground(Prova... provas) {
+    protected List<Aluno> doInBackground(Aluno... alunos) {
         try{
             DatabaseApp databaseApp = DatabaseApp.getInstance(contextActivityOrFragment);
             lista                   = null;
 
             switch (dbOperations){
                 case CREATE:{
-                    for(Prova prova : provas) {
-                        databaseApp.provasDAO().insertProva(prova);
+                    for(Aluno aluno : alunos) {
+                        databaseApp.alunosDAO().insertAluno(aluno);
                     }
                     break;
                 }
                 case READ:{
-                    lista = databaseApp.provasDAO().getAllProvas();
+                    lista = databaseApp.alunosDAO().getAllAlunos();
                     break;
                 }
                 case UPDATE:{
-                    databaseApp.provasDAO().updateProva(provas[0]);
+                    databaseApp.alunosDAO().updateAlunos(alunos[0]);
                     break;
                 }
                 case DELETE:{
-                    databaseApp.provasDAO().deleteProva(provas[0]);
+                    databaseApp.alunosDAO().deleteAluno(alunos[0]);
                     break;
                 }
             }
@@ -65,14 +73,14 @@ public class AsyncProvaCRUD extends AsyncTask<Prova, Integer, List<Prova>> {
     }
 
     @Override
-    protected void onPostExecute(List<Prova> provas) {
-        super.onPostExecute(provas);
+    protected void onPostExecute(List<Aluno> alunos) {
+        super.onPostExecute(alunos);
 
         if(dbOperations == UtilsApp.DataBaseCrudOperations.CREATE
                 || dbOperations == UtilsApp.DataBaseCrudOperations.READ) {
-            IProvaDbCallback callBack = dbCallBack.get();
-            if (callBack != null) {
-                callBack.getProvaFromDB(provas);
+            if (dbCallBack != null) {
+                IAlunoDbCallback callBack = dbCallBack.get();
+                callBack.getAlunoFromDB(alunos);
             }
         }
     }

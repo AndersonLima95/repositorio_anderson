@@ -8,7 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tbl_pergunta"
-        , indices = {@Index(value = {"prova_id"}) , @Index(value = {"resposta_id"}) , @Index(value = {"id"})}
+        , indices = {@Index(value = {"prova_id"}) , @Index(value = {"resposta_id"})}
         , foreignKeys = {@ForeignKey(entity = Prova.class , parentColumns = "id" ,
         childColumns = "prova_id" , onUpdate = CASCADE , onDelete = CASCADE)
         , @ForeignKey(entity = Prova.class , parentColumns = "id" ,
@@ -17,9 +17,10 @@ import androidx.room.PrimaryKey;
 public class Pergunta {
 
     @PrimaryKey(autoGenerate = true)
-    private int id , prova_id , resposta_id;
+    private int id ;
 
     private String pergunta;
+    private int  prova_id , resposta_id;
 
     public Pergunta(){}
 

@@ -5,6 +5,5 @@ import java.util.List;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Aluno;
 
 public interface IAlunoDbCallback {
-
-    public void getAlunoFromDb(List<Aluno> tblAluno);
+    void getAlunoFromDB(List<Aluno> tblAluno);
 }

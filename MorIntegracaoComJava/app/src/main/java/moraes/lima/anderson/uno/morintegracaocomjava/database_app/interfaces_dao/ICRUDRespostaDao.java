@@ -1,4 +1,5 @@
 package moraes.lima.anderson.uno.morintegracaocomjava.database_app.interfaces_dao;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -9,37 +10,36 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Prova;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Resposta;
 
+
 @Dao
-public interface ICRUDRespostaDao {
+public interface ICRUDRespostaDAO {
+
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertResposta(Resposta respostaTable);
 
-    public void insertResposta(Resposta tblResposta);
-
-    @Query("SELECT * FROM tbl_prova where id = :id")
-    public Resposta getEspecificaRespostaById(int id);
+    @Query("SELECT * FROM tbl_resposta where id = :id")
+    public Resposta getEspecificRespostaByID(int id);
 
     @Query("SELECT * FROM tbl_resposta ORDER BY id DESC")
-    public List<Resposta> getAllResposta();
+    public List<Resposta> getAllRespostas();
 
     @Transaction
-    @Update(entity = Resposta.class , onConflict = OnConflictStrategy.REPLACE)
-    public  void updateRespostas(Resposta tblResposta);
+    @Update(entity = Resposta.class, onConflict = OnConflictStrategy.REPLACE)
+    public void updateRespostas(Resposta respostaTable);
 
+    //O CASCADE
     @Transaction
     @Delete(entity = Resposta.class)
-    public void deleteResposta(Resposta tblResposta);
+    public void deleteResposta(Resposta respostaTable);
 
     @Transaction
-    @Query(" DELETE FROM tbl_resposta where id = :id")
+    @Query("DELETE FROM tbl_resposta WHERE id = :id")
     public void deleteRespostaByID(int id);
 
     @Transaction
-    @Query("DELETE FROM tbl_resposta where id > 0")
-    public void deleteAllRespostas();
+    @Query("DELETE FROM tbl_resposta WHERE id > 0")
+    public void deleteAllResposta();
 }
-
-

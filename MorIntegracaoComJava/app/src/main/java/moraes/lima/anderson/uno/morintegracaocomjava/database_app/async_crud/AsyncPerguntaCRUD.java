@@ -7,6 +7,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.DatabaseApp;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.dbcallbacks.IPerguntaDbCallback;
 import moraes.lima.anderson.uno.morintegracaocomjava.database_app.tabelas.Pergunta;
@@ -23,40 +24,40 @@ public class AsyncPerguntaCRUD extends AsyncTask<Pergunta, Integer, List<Pergunt
 
     public AsyncPerguntaCRUD(UtilsApp.DataBaseCrudOperations dbOperations
             , Context context
-            , IPerguntaDbCallback callBack) {
-        this.dbOperations = dbOperations;
+            , IPerguntaDbCallback callBack){
+        this.dbOperations              = dbOperations;
         this.contextActivityOrFragment = context;
-        dbCallBack = new WeakReference(callBack);
+        dbCallBack                     = new WeakReference(callBack);
     }
 
 
     @Override
     protected List<Pergunta> doInBackground(Pergunta... perguntas) {
-        try {
+        try{
             DatabaseApp databaseApp = DatabaseApp.getInstance(contextActivityOrFragment);
-            lista = null;
+            lista                   = null;
 
-            switch (dbOperations) {
-                case CREATE: {
-                    for (Pergunta pergunta : perguntas) {
-                        databaseApp.perguntaDAO().insertPergunta(pergunta);
+            switch (dbOperations){
+                case CREATE:{
+                    for(Pergunta pergunta : perguntas) {
+                        databaseApp.perguntasDAO().insertPergunta(pergunta);
                     }
                     break;
                 }
-                case READ: {
-                    lista = databaseApp.perguntaDAO().getAllPerguntas();
+                case READ:{
+                    lista = databaseApp.perguntasDAO().getAllPerguntas();
                     break;
                 }
-                case UPDATE: {
-                    databaseApp.perguntaDAO().updatePerguntas(perguntas[0]);
+                case UPDATE:{
+                    databaseApp.perguntasDAO().updatePerguntas(perguntas[0]);
                     break;
                 }
-                case DELETE: {
-                    databaseApp.perguntaDAO().deletePergunta(perguntas[0]);
+                case DELETE:{
+                    databaseApp.perguntasDAO().deletePergunta(perguntas[0]);
                     break;
                 }
             }
-        } catch (Exception e) {
+        } catch (Exception e){
             Log.d(TAG, "doInBackground: FALHA - " + e.getMessage());
             e.printStackTrace();
         }
@@ -68,7 +69,7 @@ public class AsyncPerguntaCRUD extends AsyncTask<Pergunta, Integer, List<Pergunt
     protected void onPostExecute(List<Pergunta> perguntas) {
         super.onPostExecute(perguntas);
 
-        if (dbOperations == UtilsApp.DataBaseCrudOperations.CREATE
+        if(dbOperations == UtilsApp.DataBaseCrudOperations.CREATE
                 || dbOperations == UtilsApp.DataBaseCrudOperations.READ) {
             IPerguntaDbCallback callBack = dbCallBack.get();
             if (callBack != null) {

@@ -23,9 +23,10 @@ import androidx.room.PrimaryKey;
 
 public class Resposta {
     @PrimaryKey(autoGenerate = true)
-    private int id, pergunta_id;
+    private int id;
 
     private String resposta;
+    private int pergunta_id;
 
     public Resposta(){}
 
